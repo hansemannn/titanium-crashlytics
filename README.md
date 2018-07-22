@@ -14,8 +14,9 @@ Use the native Fabric Crashlytics iOS / Android SDK in Appcelerator Titanium.
 1. Create a new folder `scripts/` in your project root
 2. Inside `scripts/`, create a `script-titanium-crashlytics.sh` with the following contents:
 ```sh
-modules/iphone/ti.crashlytics/1.0.0/Fabric.framework/run" <YOUR_API_KEY> <YOUR_SECRET_KEY>
+modules/iphone/ti.crashlytics/1.0.0/platform/Fabric.framework/run" <YOUR_API_KEY> <YOUR_SECRET_KEY>
 ```
+2a. If using Firebase, remember to have your `GoogleService-Info.plist` in place, as described [here](https://github.com/hansemannn/titanium-firebase).
 3. You are ready to go!
 
 ### Android
