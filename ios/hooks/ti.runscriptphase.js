@@ -5,22 +5,22 @@ exports.cliVersion = '>=5.0';
 exports.init = function (logger, config, cli, appc) {
 	cli.on('build.ios.xcodeproject', {
 		pre: function (data) {
-			
-			var scriptPath = '../../scripts/script-titanium-crashlytics.sh'
+			const scriptPath = '../../scripts/script-titanium-crashlytics.sh'
 
-			var builder = this;
-			var xcodeProject = data.args[0];
+			const builder = this;
+			const xcodeProject = data.args[0];
+
 			var xobjs = xcodeProject.hash.project.objects;
 
 			if (typeof builder.generateXcodeUuid !== 'function') {
-				var uuidIndex = 1;
-				var uuidRegExp = /^(0{18}\d{6})$/;
-				var lpad = appc.string.lpad;
+				const uuidIndex = 1;
+				const uuidRegExp = /^(0{18}\d{6})$/;
+				const lpad = appc.string.lpad;
 
 				Object.keys(xobjs).forEach(function (section) {
 					Object.keys(xobjs[section]).forEach(function (uuid) {
-						var m = uuid.match(uuidRegExp);
-						var n = m && parseInt(m[1]);
+						const m = uuid.match(uuidRegExp);
+						const n = m && parseInt(m[1]);
 						if (n && n > uuidIndex) {
 							uuidIndex = n + 1;
 						}
@@ -31,30 +31,46 @@ exports.init = function (logger, config, cli, appc) {
 					return lpad(uuidIndex++, 24, '0');
 				};
 			}
-			addScriptBuildPhase(builder, xobjs, scriptPath);
+			addScriptBuildPhase(builder, xobjs, scriptPath, appc);
 		}
 	});
 };
 
-function addScriptBuildPhase(builder, xobjs, scriptPath) {
+function addScriptBuildPhase(builder, xobjs, scriptPath, appc) {
 	if (!scriptPath) return;
 	
-	var script_uuid = builder.generateXcodeUuid();
-	var shell_path = '/bin/sh';
-	var shell_script = 'bash \"' + scriptPath + '\"';
+	const script_uuid = builder.generateXcodeUuid();
+	const shell_path = '/bin/sh';
+	const shell_script = 'bash \"' + scriptPath + '\"';
 
-	createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script);
-	createPBXRunScriptNativeTarget(xobjs, script_uuid);
+	constructInputPaths(appc, function (input_paths) {
+		createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script, input_paths);
+		createPBXRunScriptNativeTarget(xobjs, script_uuid);
+	});
 }
 
-function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script){
+function constructInputPaths(appc, cb) {
+	appc.subprocess.run('/usr/bin/xcodebuild', [ '-version' ], function (code, result) {
+		const xcodeVersion = result.substring(result.indexOf('Xcode ') + 6, result.indexOf('\n'));
+		const isXcode10 = appc.version.gte(xcodeVersion, '10.0.0')
+
+		// Xcode 10+ needs to inject the Info.plist in the "Input Files" section of the Script Phase
+		if (isXcode10) {
+			cb('(\n\t"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)"\n)')
+		} else {
+			cb('(\n)');
+		}	
+	});
+}
+
+function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script, input_paths) {
 	xobjs.PBXShellScriptBuildPhase = xobjs.PBXShellScriptBuildPhase || {};
   
 	xobjs.PBXShellScriptBuildPhase[script_uuid] = { 
  		isa: 'PBXShellScriptBuildPhase', 
  		buildActionMask: '2147483647', 
  		files: '(\n)', 
- 		inputPaths: '(\n)', 
+ 		inputPaths: input_paths, 
  		outputPaths: '(\n)', 
  		runOnlyForDeploymentPostprocessing: 0, 
  		shellPath: shell_path, 
@@ -63,7 +79,7 @@ function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell
 }
 
 function createPBXRunScriptNativeTarget(xobjs, script_uuid) {
-	for (var key in xobjs.PBXNativeTarget) {
+	for (const key in xobjs.PBXNativeTarget) {
 		xobjs.PBXNativeTarget[key].buildPhases.push({ 
         		value: script_uuid + '', 
         		comment: 'Run Script Phase'
