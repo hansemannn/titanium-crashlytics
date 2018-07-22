@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+repositories {
+	google()
+	jcenter()
+	mavenCentral()
+}
+
+dependencies {
+	compile('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
+    	transitive = true;
+  	}
+}
+
+task getDeps(type: Copy) {
+	from sourceSets.main.runtimeClasspath
+	exclude 'support-*'
+	into 'lib/'
+}

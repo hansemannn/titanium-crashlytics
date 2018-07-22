@@ -1,0 +1,8 @@
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/src/ti/crashlytics/TitaniumCrashlyticsModule.java"
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/build/generated/java/ti/crashlytics/TitaniumCrashlyticsBootstrap.java"
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/build/generated/r/android/support/compat/R.java"
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/build/generated/r/android/support/design/R.java"
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/build/generated/r/android/support/v7/appcompat/R.java"
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/build/generated/r/android/support/v7/cardview/R.java"
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/build/generated/r/ti/crashlytics/R.java"
+"/Users/hknoechel/Documents/appcelerator_modules/titanium-crashlytics/android/build/generated/r/ti/modules/titanium/ui/R.java"
