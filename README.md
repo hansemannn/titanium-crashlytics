@@ -45,6 +45,11 @@ Use the native Fabric Crashlytics iOS / Android SDK in Appcelerator Titanium.
 ```
 2. You are ready to go!
 
+## Example
+
+See the [Sample App](https://github.com/hansemannn/titanium-crashlytics-demo/blob/master/README.md) for an example of configuring
+the required API keys and project settings.
+
 ## API's
 
 ### `crash()`
