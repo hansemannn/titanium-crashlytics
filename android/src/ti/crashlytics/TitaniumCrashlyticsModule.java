@@ -15,6 +15,8 @@ import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
 
+import android.app.Activity;
+
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
@@ -23,21 +25,18 @@ public class TitaniumCrashlyticsModule extends KrollModule
 {
 
 	// Standard Debugging variables
+
 	private static final String LCAT = "TitaniumCrashlyticsModule";
 	private static final boolean DBG = TiConfig.LOGD;
-
-	// You can define constants with @Kroll.constant, for example:
-	// @Kroll.constant public static final String EXTERNAL_NAME = value;
 
 	public TitaniumCrashlyticsModule()
 	{
 		super();
 	}
 
-	@Kroll.onAppCreate
-	public static void onAppCreate(TiApplication app)
-	{
-		Fabric.with(TiApplication.getAppCurrentActivity(), new Crashlytics());
+	@Override
+	public void onStart(Activity activity) {
+		Fabric.with(activity, new Crashlytics());
 	}
 
 	// Methods
