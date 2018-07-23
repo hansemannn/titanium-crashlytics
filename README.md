@@ -9,6 +9,10 @@ Use the native Fabric Crashlytics iOS / Android SDK in Appcelerator Titanium.
 
 ## Setup
 
+In general, remember to not use any Crashlytics API's before actually opening your first window. While this might not result
+in a crash on iOS, the native Android SDK will error if being used before your app finished launching due to requiring the
+native `Activity`.
+
 ### iOS
 
 1. Create a new folder `scripts/` in your project root
