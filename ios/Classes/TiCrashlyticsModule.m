@@ -2,7 +2,7 @@
  * titanium-crashlytics
  *
  * Created by Hans Knoechel
- * Copyright (c) 2018 Hans Knoechel. All rights reserved.
+ * Copyright (c) 2018 Hans Knoechel. No rights reserved.
  */
 
 #import "TiCrashlyticsModule.h"
@@ -10,6 +10,7 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 #import "TiApp.h"
+#import "TiExceptionHandler.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -45,6 +46,46 @@
 - (void)crash:(id)unused
 {
   [[Crashlytics sharedInstance] crash];
+}
+
+- (void)setUserIdentifier:(id)userIdentifier
+{
+  ENSURE_SINGLE_ARG(userIdentifier, NSString);
+  [[Crashlytics sharedInstance] setUserIdentifier:userIdentifier];
+}
+
+- (void)setUserName:(id)userName
+{
+  ENSURE_SINGLE_ARG(userName, NSString);
+  [[Crashlytics sharedInstance] setUserName:userName];
+}
+
+- (void)setUserEmail:(id)userEmail
+{
+  ENSURE_SINGLE_ARG(userEmail, NSString);
+  [[Crashlytics sharedInstance] setUserEmail:userEmail];
+}
+
+- (void)log:(NSArray *)args
+{
+  [Answers logCustomEventWithName:args[0] customAttributes:args.count > 1 ? args[1] : nil];
+}
+
+- (void)recordCustomException:(id)params
+{
+  NSString *name = params[@"name"];
+  NSString *reason = params[@"reason"];
+  NSArray<NSString *> *frames = params[@"frames"];
+  
+  NSMutableArray<CLSStackFrame *> *frameArray = [NSMutableArray arrayWithCapacity:frames.count];
+  
+  for (NSString *frame in frames) {
+    [frameArray addObject:[CLSStackFrame stackFrameWithSymbol:frame]];
+  }
+
+  [[Crashlytics sharedInstance] recordCustomExceptionName:name
+                                                   reason:reason
+                                               frameArray:frameArray];
 }
 
 - (void)throwException:(id)unused

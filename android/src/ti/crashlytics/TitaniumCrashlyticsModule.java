@@ -48,9 +48,34 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	}
 
 	@Kroll.method
+	public void log(String message)
+	{
+		Crashlytics.log(message);
+	}
+
+	@Kroll.method
 	public void throwException()
 	{
-		throw new RuntimeException("This is a crash");
+		try {
+			throw new RuntimeException("This is a crash");
+		} catch (RuntimeException e) {
+			Crashlytics.logException(e);
+		}
+	}
+
+	@Kroll.method
+	public void setUserIdentifier(String userIdentifier) {
+		Crashlytics.setUserIdentifier(userIdentifier);
+	}
+
+	@Kroll.method
+	public void setUserName(String userName) {
+		Crashlytics.setUserName(userName);
+	}
+
+	@Kroll.method
+	public void setUserEmail(String userEmail) {
+		Crashlytics.setUserEmail(userEmail);
 	}
 }
 

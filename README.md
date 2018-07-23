@@ -60,6 +60,29 @@ Simulate a crash (for testing purpose)
 
 Simulate an exception (for testing purpose)
 
+### `log(message, params)`
+
+Log a Custom Event to see user actions that are uniquely important for your app in real-time.
+The `params` parameter is an iOS-only `Object`.
+
+### `setUserIdentifier(userIdentifier)`
+
+Specify a user identifier which will be visible in the Crashlytics UI.
+
+### `setUserName(userName)`
+
+Specify a user name which will be visible in the Crashlytics UI.
+
+### `setUserEmail(userEmail)`
+
+Specify a user email which will be visible in the Crashlytics UI.
+
+### `recordCustomException(params)`
+
+##### (iOS only!)
+
+This method can be used to record a single exception structure in a report.
+
 ## Author
 
 Hans Knöchel ([@hansemannnn](https://twitter.com/hansemannnn) / [Web](https://hans-knoechel.de))

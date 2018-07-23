@@ -7,4 +7,4 @@
 // https://developer.apple.com/library/content/featuredarticles/XcodeConcepts/Concept-Build_Settings.html
 // 
 
-OTHER_LDFLAGS=$(inherited) -framework Crashlytics Fabric
+OTHER_LDFLAGS=$(inherited) -framework Fabric -framework Crashlytics
