@@ -36,6 +36,7 @@ public class TitaniumCrashlyticsModule extends KrollModule
 
 	@Override
 	public void onStart(Activity activity) {
+		super.onStart();
 		Fabric.with(activity, new Crashlytics());
 	}
 
