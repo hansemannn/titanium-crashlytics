@@ -6,14 +6,14 @@
  */
 
 #import "TiCrashlyticsModule.h"
+#import "TiApp.h"
 #import "TiBase.h"
+#import "TiExceptionHandler.h"
 #import "TiHost.h"
 #import "TiUtils.h"
-#import "TiApp.h"
-#import "TiExceptionHandler.h"
 
-#import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
 
 @implementation TiCrashlyticsModule
 
@@ -37,7 +37,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [Fabric with:@[[Crashlytics class]]];
+  [Fabric with:@[ [Crashlytics class] ]];
   return YES;
 }
 
@@ -73,12 +73,14 @@
 
 - (void)recordCustomException:(id)params
 {
+
+  ENSURE_SINGLE_ARG(params, NSDictionary);
   NSString *name = params[@"name"];
   NSString *reason = params[@"reason"];
-  NSArray<NSString *> *frames = params[@"frames"];
-  
+  NSArray *frames = params[@"frames"];
+
   NSMutableArray<CLSStackFrame *> *frameArray = [NSMutableArray arrayWithCapacity:frames.count];
-  
+
   for (NSString *frame in frames) {
     [frameArray addObject:[CLSStackFrame stackFrameWithSymbol:frame]];
   }
@@ -94,4 +96,3 @@
 }
 
 @end
-
