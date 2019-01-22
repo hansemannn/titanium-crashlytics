@@ -47,7 +47,11 @@ native `Activity`.
 ```xml
 <meta-data android:name="io.fabric.ApiKey" android:value="YOUR_API_KEY" />
 ```
-2. You are ready to go!
+2. Add your GUID or a random UUID to `[app]/platform/android/res/values/strings`:
+```xml
+<string name="com.crashlytics.android.build_id">RANDOM_UUID</string>
+```
+3. You are ready to go!
 
 ## Example
 
