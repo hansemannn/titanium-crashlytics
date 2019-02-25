@@ -73,7 +73,7 @@ function createPBXRunScriptNativeTarget(xobjs, script_uuid) {
 	for (const key in xobjs.PBXNativeTarget) {
 		xobjs.PBXNativeTarget[key].buildPhases.push({
 			value: script_uuid + '',
-			comment: 'Run Script Phase'
+			comment: 'Titanium Crashlytics'
 		});
 		return;
 	}
