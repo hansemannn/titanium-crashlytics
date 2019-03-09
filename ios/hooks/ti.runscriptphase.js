@@ -10,6 +10,11 @@ exports.init = function (logger, config, cli, appc) {
 			const builder = this;
 			const xcodeProject = data.args[0];
 
+			if (builder.deployType !== 'production') {
+				console.log('Not in production, skipping Crashlytics DSYM upload …');
+				return;
+			}
+
 			var xobjs = xcodeProject.hash.project.objects;
 
 			if (typeof builder.generateXcodeUuid !== 'function') {
@@ -53,7 +58,6 @@ function addScriptBuildPhase(builder, xobjs, scriptPath, appc) {
 }
 
 function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script, input_paths) {
-	console.log('Creating run shell-script build phase');
 	xobjs.PBXShellScriptBuildPhase = xobjs.PBXShellScriptBuildPhase || {};
 
 	xobjs.PBXShellScriptBuildPhase[script_uuid] = {
@@ -69,11 +73,10 @@ function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell
 }
 
 function createPBXRunScriptNativeTarget(xobjs, script_uuid) {
-	console.log('Creating run shell-script native target');
 	for (const key in xobjs.PBXNativeTarget) {
 		xobjs.PBXNativeTarget[key].buildPhases.push({
 			value: script_uuid + '',
-			comment: 'Titanium Crashlytics'
+			comment: '[Ti] Crashlytics'
 		});
 		return;
 	}
