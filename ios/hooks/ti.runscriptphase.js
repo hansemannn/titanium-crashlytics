@@ -50,7 +50,7 @@ function addScriptBuildPhase(builder, xobjs, scriptPath, appc) {
 
 	const script_uuid = builder.generateXcodeUuid();
 	const shell_path = '/bin/sh';
-	const shell_script = 'bash \"' + scriptPath + '\"';
+	const shell_script = '/bin/bash \"' + scriptPath + '\"';
 	const input_paths = '(\n\t"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)"\n)';
 
 	createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script, input_paths);
@@ -68,6 +68,7 @@ function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell
 		outputPaths: '(\n)',
 		runOnlyForDeploymentPostprocessing: 0,
 		shellPath: shell_path,
+		name: '"[Ti] Crashlytics"',
 		shellScript: JSON.stringify(shell_script)
 	};
 }

@@ -19,7 +19,7 @@ native `Activity`.
 2. Inside `scripts/`, create a `script-titanium-crashlytics.sh` with the following contents (replace the version with your version):
 ```sh
 # Do not run this file manually! It is referenced from your native Xcode project
-"../../modules/iphone/ti.crashlytics/1.2.0/platform/Fabric.framework/uploadDSYM" <YOUR_API_KEY> <YOUR_SECRET_KEY>
+"../../modules/iphone/ti.crashlytics/1.2.1/platform/Fabric.framework/uploadDSYM" <YOUR_API_KEY> <YOUR_SECRET_KEY>
 ```
 2a. If using Firebase, remember to have your `GoogleService-Info.plist` in place, as described [here](https://github.com/hansemannn/titanium-firebase).
 3. Add your [API key](https://fabric.io/kits/ios/crashlytics/manual-install?step=2) to the plist section of your tiapp.xml:
