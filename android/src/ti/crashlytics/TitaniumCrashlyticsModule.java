@@ -62,20 +62,20 @@ public class TitaniumCrashlyticsModule extends KrollModule
 			Crashlytics.logException(e);
 		}
 	}
-	
+
 	@Kroll.method
 	public void throwCustomException(String message, String myline, String sourceNameAndroid, String lineSource, String javascriptStack)
 	{
-		System.out.println(message);
+		Log.d(message);
 		Throwable barT = new Throwable(message);
 		String[] lines = javascriptStack.split("\\r?\\n");
-		int count = 1;
+		int count = 0;
 		StackTraceElement[] stackTarray = new StackTraceElement[lines.length];
 
 	   	for (String lineStack : lines) {
 
 		   	StackTraceElement stackNew = new StackTraceElement(sourceNameAndroid, lineStack, lineSource,  Integer.parseInt(myline));
-		   	stackTarray[count-1] = stackNew;
+		   	stackTarray[count] = stackNew;
 
 	   	}
 

@@ -73,7 +73,7 @@ Simulate an exception (for testing purpose)
 
 Used with EventListener "uncaughtException" function(evt)
 
-example:             Crashlytics.throwException(evt.message,evt.line,evt.sourceName,evt.lineSource,evt.javascriptStack.toString());
+example:             Crashlytics.throwCustomException(evt.message,evt.line,evt.sourceName,evt.lineSource,evt.javascriptStack.toString());
 
 ### `log(message, params)`
 
