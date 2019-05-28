@@ -66,6 +66,13 @@ Simulate a crash (for testing purpose)
 
 ### `throwException()`
 
+Used with EventListener "uncaughtException" function(evt)
+
+example:             Crashlytics.throwException(evt.message,evt.line,evt.sourceName,evt.lineSource,evt.javascriptStack.toString());
+
+
+### `throwCustomException(String message, String myline, String sourceNameAndroid, String lineSource, String javascriptStack)`
+
 Simulate an exception (for testing purpose)
 
 ### `log(message, params)`
