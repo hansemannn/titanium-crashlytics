@@ -6,14 +6,11 @@ exports.init = function (logger, config, cli, appc) {
 	cli.on('build.ios.xcodeproject', {
 		pre: function (data) {
 			const scriptPath = '../../scripts/script-titanium-crashlytics.sh';
+			const i18n = appc.i18n(__dirname);
+			const __ = i18n.__;
 
 			const builder = this;
 			const xcodeProject = data.args[0];
-
-			if (builder.deployType !== 'production') {
-				console.log('Not in production, skipping Crashlytics DSYM upload …');
-				return;
-			}
 
 			var xobjs = xcodeProject.hash.project.objects;
 
@@ -38,12 +35,17 @@ exports.init = function (logger, config, cli, appc) {
 				};
 			}
 
-			addScriptBuildPhase(builder, xobjs, scriptPath, appc);
+			if (builder.forceRebuild === false) {
+				logger.debug(__('Skipping Crashlytics injection for incremental build …'));
+				return;
+			}
+
+			addScriptBuildPhase(builder, xobjs, scriptPath);
 		}
 	});
 };
 
-function addScriptBuildPhase(builder, xobjs, scriptPath, appc) {
+function addScriptBuildPhase(builder, xobjs, scriptPath) {
 	if (!scriptPath) {
 		return;
 	}
