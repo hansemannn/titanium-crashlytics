@@ -11,9 +11,8 @@ package ti.crashlytics;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
-import org.appcelerator.titanium.TiApplication;
-import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
+import org.appcelerator.titanium.TiApplication;
 
 import android.app.Activity;
 
@@ -34,9 +33,9 @@ public class TitaniumCrashlyticsModule extends KrollModule
 		super();
 	}
 
-	@Override
-	public void onStart(Activity activity) {
-		Fabric.with(activity, new Crashlytics());
+	@Kroll.method
+    public void init() {
+		Fabric.with(TiApplication.getAppRootOrCurrentActivity(), new Crashlytics());
 	}
 
 	// Methods
@@ -88,17 +87,17 @@ public class TitaniumCrashlyticsModule extends KrollModule
 		}
 	}
 
-	@Kroll.method
+	@Kroll.setProperty
 	public void setUserIdentifier(String userIdentifier) {
 		Crashlytics.setUserIdentifier(userIdentifier);
 	}
 
-	@Kroll.method
+	@Kroll.setProperty
 	public void setUserName(String userName) {
 		Crashlytics.setUserName(userName);
 	}
 
-	@Kroll.method
+	@Kroll.setProperty
 	public void setUserEmail(String userEmail) {
 		Crashlytics.setUserEmail(userEmail);
 	}
