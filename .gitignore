@@ -32,3 +32,5 @@ nbproject
 ios/firebase.analytics-iphone-*.zip
 /ios/dist
 android/.gradle
+
+java-sources.txt
