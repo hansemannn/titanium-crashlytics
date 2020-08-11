@@ -2,6 +2,12 @@
 
 Use the native Fabric Crashlytics iOS / Android SDK in Appcelerator Titanium.
 
+## Supporting this effort
+
+The whole Firebase support in Titanium is developed and maintained by the community (`@hansemannn` and `@m1ga`). To keep
+this project maintained and be able to use the latest Firebase SDK's, please see the "Sponsor" button of this repository,
+thank you!
+
 ## Requirements
 
 - [x] iOS: Titanium SDK 7.3.0+
