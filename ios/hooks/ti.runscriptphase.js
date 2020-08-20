@@ -1,16 +1,26 @@
+/* global __dirname */
+
+const path = require('path');
 
 exports.id = 'ti.runscriptphase';
 exports.cliVersion = '>=5.0';
 
-exports.init = function (logger, config, cli, appc) {
+exports.init = function (logger, _, cli, appc) {
 	cli.on('build.ios.xcodeproject', {
 		pre: function (data) {
-			const scriptPath = '../../scripts/script-titanium-crashlytics.sh';
-			const i18n = appc.i18n(__dirname);
-			const __ = i18n.__;
+			const __ = appc.i18n(__dirname).__;
+			const appName = cli.tiapp.name;
+			const dsymPaths = path.resolve('./build/iphone/build/Products/Release-iphoneos');
+			const googleServiceFile = '../../Resources/iphone/GoogleService-Info.plist';
+			const scriptArgs = `../../scripts/run -gsp ${googleServiceFile} -p ios\n../../scripts/upload-symbols -gsp ${googleServiceFile} -p ios ${path.join(`${dsymPaths}/${appName}.app.dSYM`)}`;
+			const xcodeProject = data.args[0];
 
 			const builder = this;
-			const xcodeProject = data.args[0];
+
+			if (data.ctx.deployType !== 'production') {
+				logger.debug(__('Skipping Crashlytics injection for non-production build …'));
+				return;
+			}
 
 			var xobjs = xcodeProject.hash.project.objects;
 
@@ -40,26 +50,25 @@ exports.init = function (logger, config, cli, appc) {
 				return;
 			}
 
-			addScriptBuildPhase(builder, xobjs, scriptPath);
+			addScriptBuildPhase(builder, xobjs, scriptArgs);
 		}
 	});
 };
 
-function addScriptBuildPhase(builder, xobjs, scriptPath) {
-	if (!scriptPath) {
+function addScriptBuildPhase(builder, xobjs, scriptArgs) {
+	if (!scriptArgs) {
 		return;
 	}
 
 	const script_uuid = builder.generateXcodeUuid();
-	const shell_path = '/bin/sh';
-	const shell_script = '/bin/bash \"' + scriptPath + '\"';
+	const shell_script = scriptArgs;
 	const input_paths = '(\n\t"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)"\n)';
 
-	createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script, input_paths);
+	createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_script, input_paths);
 	createPBXRunScriptNativeTarget(xobjs, script_uuid);
 }
 
-function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell_script, input_paths) {
+function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_script, input_paths) {
 	xobjs.PBXShellScriptBuildPhase = xobjs.PBXShellScriptBuildPhase || {};
 
 	xobjs.PBXShellScriptBuildPhase[script_uuid] = {
@@ -69,7 +78,7 @@ function createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_path, shell
 		inputPaths: input_paths,
 		outputPaths: '(\n)',
 		runOnlyForDeploymentPostprocessing: 0,
-		shellPath: shell_path,
+		shellPath: '/bin/sh',
 		name: '"[Ti] Crashlytics"',
 		shellScript: JSON.stringify(shell_script)
 	};

@@ -2,9 +2,9 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.1.2
+version: 2.0.0
 apiversion: 4
-architectures: arm64-v8a armeabi-v7a x86
+architectures: arm64-v8a armeabi-v7a x86 x86_64
 description: titanium-crashlytics
 author: Hans Knöchel
 license: MIT
@@ -15,4 +15,4 @@ name: titanium-crashlytics
 moduleid: ti.crashlytics
 guid: 108ab55a-0cbb-4c63-ade2-536dabdfa250
 platform: android
-minsdk: 7.0.0
+minsdk: 9.0.0

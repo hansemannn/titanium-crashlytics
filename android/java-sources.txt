@@ -1,4 +1,5 @@
 "/Users/hans/Documents/dev/titanium/titanium-crashlytics/android/src/ti/crashlytics/TitaniumCrashlyticsModule.java"
+"/Users/hans/Documents/dev/titanium/titanium-crashlytics/android/build/generated/java/ti/crashlytics/CommonJsSourceProvider.java"
 "/Users/hans/Documents/dev/titanium/titanium-crashlytics/android/build/generated/java/ti/crashlytics/TitaniumCrashlyticsBootstrap.java"
 "/Users/hans/Documents/dev/titanium/titanium-crashlytics/android/build/generated/r/android/support/compat/R.java"
 "/Users/hans/Documents/dev/titanium/titanium-crashlytics/android/build/generated/r/android/support/coreui/R.java"
