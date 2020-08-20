@@ -4,7 +4,7 @@ Use the native Fabric Crashlytics iOS / Android SDK in Appcelerator Titanium.
 
 ## Requirements
 
-- [x] iOS: Titanium SDK 7.3.0+
+- [x] iOS: Titanium SDK 8.0.0+
 - [x] Android: Titanium SDK 7.0.0+
 
 ## Setup
@@ -12,6 +12,11 @@ Use the native Fabric Crashlytics iOS / Android SDK in Appcelerator Titanium.
 In general, remember to not use any Crashlytics API's before actually opening your first window. While this might not result
 in a crash on iOS, the native Android SDK will error if being used before your app finished launching due to requiring the
 native `Activity`.
+
+## Breaking changes!
+
+Module version 2.0.0 uses Firebase Crashlytics instead of the (deprecated) Fabric Crashlytics. Please make sure to check the
+removed and changed API's!
 
 ### iOS
 
@@ -21,24 +26,9 @@ native `Activity`.
 # Do not run this file manually! It is referenced from your native Xcode project
 "../../modules/iphone/ti.crashlytics/1.2.1/platform/Fabric.framework/uploadDSYM" <YOUR_API_KEY> <YOUR_SECRET_KEY>
 ```
-2a. If using Firebase, remember to have your `GoogleService-Info.plist` in place, as described [here](https://github.com/hansemannn/titanium-firebase).
-3. Add your [API key](https://fabric.io/kits/ios/crashlytics/manual-install?step=2) to the plist section of your tiapp.xml:
-```xml
-  <key>Fabric</key>
-  <dict>
-    <key>APIKey</key>
-    <string>YOUR_API_KEY</string>
-    <key>Kits</key>
-    <array>
-      <dict>
-        <key>KitInfo</key>
-        <dict/>
-        <key>KitName</key>
-        <string>Crashlytics</string>
-      </dict>
-    </array>
-  </dict>
-```
+3. Make sure your Firebase project is configured properly and you have your `GoogleService-Info.plist` in place, 
+as described [here](https://github.com/hansemannn/titanium-firebase).
+
 4. You are ready to go!
 
 ### Android
@@ -60,6 +50,18 @@ the required API keys and project settings.
 
 ## API's
 
+### Cross platform API's
+
+### `log(message)`
+
+Log a Custom Event to see user actions that are uniquely important for your app in real-time.
+
+### `setUserIdentifier(userIdentifier)`
+
+Specify a user identifier which will be visible in the Crashlytics UI.
+
+### Android only API's
+
 ### `crash()`
 
 Simulate a crash (for testing purpose)
@@ -67,15 +69,6 @@ Simulate a crash (for testing purpose)
 ### `throwException()`
 
 Simulate an exception (for testing purpose)
-
-### `log(message, params)`
-
-Log a Custom Event to see user actions that are uniquely important for your app in real-time.
-The `params` parameter is an iOS-only `Object`.
-
-### `setUserIdentifier(userIdentifier)`
-
-Specify a user identifier which will be visible in the Crashlytics UI.
 
 ### `setUserName(userName)`
 
@@ -85,11 +78,6 @@ Specify a user name which will be visible in the Crashlytics UI.
 
 Specify a user email which will be visible in the Crashlytics UI.
 
-### `recordCustomException(params)`
-
-##### (iOS only!)
-
-This method can be used to record a single exception structure in a report.
 
 ## Author
 

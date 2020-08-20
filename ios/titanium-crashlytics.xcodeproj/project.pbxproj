@@ -26,10 +26,8 @@
 		24DD6CFA1134B3F500162E58 /* TiCrashlyticsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiCrashlyticsModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* TiCrashlyticsModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiCrashlyticsModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* TiCrashlyticsModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiCrashlyticsModuleAssets.m */; };
+		3A794ECA23E6F95600B4D091 /* FirebaseCrashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A794EC923E6F95600B4D091 /* FirebaseCrashlytics.framework */; };
 		AA747D9F0F9514B9006C5449 /* TiCrashlytics_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiCrashlytics_Prefix.pch */; };
-		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
-		DB6F8578210493BC008216AE /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB6F8576210493BC008216AE /* Crashlytics.framework */; };
-		DB6F8579210493BC008216AE /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB6F8577210493BC008216AE /* Fabric.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,11 +46,9 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* TiCrashlyticsModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiCrashlyticsModuleAssets.h; path = Classes/TiCrashlyticsModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* TiCrashlyticsModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiCrashlyticsModuleAssets.m; path = Classes/TiCrashlyticsModuleAssets.m; sourceTree = "<group>"; };
+		3A794EC923E6F95600B4D091 /* FirebaseCrashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCrashlytics.framework; path = platform/FirebaseCrashlytics.framework; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* TiCrashlytics_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiCrashlytics_Prefix.pch; sourceTree = SOURCE_ROOT; };
-		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libti.crashlytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libti.crashlytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB6F8576210493BC008216AE /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = platform/Crashlytics.framework; sourceTree = "<group>"; };
-		DB6F8577210493BC008216AE /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = platform/Fabric.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB6F8578210493BC008216AE /* Crashlytics.framework in Frameworks */,
-				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
-				DB6F8579210493BC008216AE /* Fabric.framework in Frameworks */,
+				3A794ECA23E6F95600B4D091 /* FirebaseCrashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,9 +85,7 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DB6F8576210493BC008216AE /* Crashlytics.framework */,
-				DB6F8577210493BC008216AE /* Fabric.framework */,
-				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+				3A794EC923E6F95600B4D091 /* FirebaseCrashlytics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,17 +149,18 @@
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1130;
 			};
 			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "titanium-crashlytics" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
+				Base,
+				fr,
+				de,
+				ja,
+				en,
 			);
 			mainGroup = 0867D691FE84028FC02AAC07 /* titanium-crashlytics */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
@@ -311,6 +304,7 @@
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -375,6 +369,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
