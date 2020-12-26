@@ -27,11 +27,7 @@ removed and changed API's!
 ### iOS
 
 1. Create a new folder `scripts/` in your project root
-2. Inside `scripts/`, create a `script-titanium-crashlytics.sh` with the following contents (replace the version with your version):
-```sh
-# Do not run this file manually! It is referenced from your native Xcode project
-"../../modules/iphone/ti.crashlytics/1.2.1/platform/Fabric.framework/uploadDSYM" <YOUR_API_KEY> <YOUR_SECRET_KEY>
-```
+2. Copy the `run` and `upload-symbols` shell files from this repo's `helper/` directory to `scripts/` in your project
 3. Make sure your Firebase project is configured properly and you have your `GoogleService-Info.plist` in place, 
 as described [here](https://github.com/hansemannn/titanium-firebase).
 
