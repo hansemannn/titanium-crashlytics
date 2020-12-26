@@ -2,12 +2,13 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 2.0.0
+version: 3.0.0
 apiversion: 2
-architectures: armv7 arm64 i386 x86_64
+architectures: arm64 x86_64
 description: titanium-crashlytics
 author: Hans Knöchel
 license: MIT
+mac: false
 copyright: Copyright (c) 2018-present by Hans Knöchel
 
 # these should not be edited
@@ -15,4 +16,4 @@ name: titanium-crashlytics
 moduleid: ti.crashlytics
 guid: 108ab55a-0cbb-4c63-ade2-536dabdfa250
 platform: iphone
-minsdk: 8.0.0
+minsdk: 9.2.0.GA
