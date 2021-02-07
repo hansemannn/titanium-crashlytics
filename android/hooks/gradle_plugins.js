@@ -24,7 +24,7 @@ function init(logger, config, cli, appc) {
 
 			const projectBuildGradleContents = fs.readFileSync(projectBuildGradle, 'utf-8').toString();
 			const updatedProjectBuildGradleContents = projectBuildGradleContents
-				.split('dependencies {').join('dependencies {\n\t\tclasspath \'com.google.firebase:firebase-crashlytics-gradle:2.2.0\'');
+				.split('dependencies {').join('dependencies {\n\t\tclasspath \'com.google.firebase:firebase-crashlytics-gradle:2.4.1\'');
 
 			fs.writeFileSync(projectBuildGradle, updatedProjectBuildGradleContents);
 			
@@ -34,7 +34,7 @@ function init(logger, config, cli, appc) {
 
 			const appBuildGradleContents = fs.readFileSync(appBuildGradle, 'utf-8').toString();
 			const updatedAppBuildGradleContents = appBuildGradleContents
-				.split('apply plugin: \'com.android.application\'').join('apply plugin: \'com.android.application\'\napply plugin: \'com.google.firebase.crashlytics\'');
+				.split('apply plugin: \'com.android.application\'').join('apply plugin: \'com.android.application\'\napply plugin: \'com.google.gms.google-services\'\napply plugin: \'com.google.firebase.crashlytics\'');
 
 			fs.writeFileSync(appBuildGradle, updatedAppBuildGradleContents);
 		}

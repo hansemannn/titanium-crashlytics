@@ -29,11 +29,16 @@ public class TitaniumCrashlyticsModule extends KrollModule
 		throw new RuntimeException("This is a crash");
 	}
 
-	@Kroll.method
 	@Kroll.setProperty
 	public void setUserId(String userId)
 	{
 		FirebaseCrashlytics.getInstance().setUserId(userId);
+	}
+
+	@Kroll.setProperty
+	public void setCrashlyticsCollectionEnabled(boolean crashlyticsCollectionEnabled)
+	{
+		FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(crashlyticsCollectionEnabled);
 	}
 }
 
