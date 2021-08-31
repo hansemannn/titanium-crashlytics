@@ -49,12 +49,4 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	public static void onAppCreate(TiApplication app) {
 		FirebaseCrashlytics.getInstance().recordException(new Exception());
 	}
-
-
-	// @Override
-	// protected void initActivity(Activity activity) {
-	// 	super.initActivity(activity);
-	// 	Log.i("-----", "App init activity");
-	// 	FirebaseCrashlytics.getInstance().recordException(new Exception());
-	// }
 }
