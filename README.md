@@ -28,22 +28,23 @@ removed and changed API's!
 
 1. Create a new folder `scripts/` in your project root
 2. Copy the `run` and `upload-symbols` shell files from this repo's `helper/` directory to `scripts/` in your project
-3. Make sure your Firebase project is configured properly and you have your `GoogleService-Info.plist` in place, 
+3. Make sure your Firebase project is configured properly and you have your `GoogleService-Info.plist` in place,
 as described [here](https://github.com/hansemannn/titanium-firebase).
 
 4. You are ready to go!
 
 ### Android
 
+```
+var crash = require("ti.crashlytics");
+crash.crash();  // test crash
+```
+
 1. Add the following to the `<application>` tag inside the manifest configuration in your tiapp.xml:
 ```xml
 <meta-data android:name="io.fabric.ApiKey" android:value="YOUR_API_KEY" />
 ```
-2. Add your GUID or a random UUID to `[app]/platform/android/res/values/strings`:
-```xml
-<string name="com.crashlytics.android.build_id">RANDOM_UUID</string>
-```
-3. You are ready to go!
+2. You are ready to go!
 
 ## Example
 
@@ -92,4 +93,3 @@ MIT
 ## Contributing
 
 Code contributions are greatly appreciated, please submit a new [Pull-Request](https://github.com/hansemannn/titanium-crashlytics/pull/new/master)!
-
