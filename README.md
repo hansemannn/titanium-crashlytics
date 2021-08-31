@@ -37,7 +37,6 @@ as described [here](https://github.com/hansemannn/titanium-firebase).
 
 ```
 var crash = require("ti.crashlytics");
-crash.init();
 crash.crash();  // test crash
 ```
 
@@ -65,10 +64,6 @@ Log a Custom Event to see user actions that are uniquely important for your app 
 Specify a user identifier which will be visible in the Crashlytics UI.
 
 ### Android only API's
-
-### `init()`
-
-Initializes Crashlytics.
 
 ### `crash()`
 

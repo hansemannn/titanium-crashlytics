@@ -9,6 +9,7 @@
 package ti.crashlytics;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
 
 import org.appcelerator.kroll.KrollModule;
@@ -21,13 +22,6 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics;
 public class TitaniumCrashlyticsModule extends KrollModule
 {
 	// Methods
-
-	@Kroll.method
-	public void init()
-	{
-		FirebaseCrashlytics.getInstance().recordException(new Exception());
-	}
-
 	@Kroll.method
 	public void log(String message)
 	{
@@ -50,4 +44,17 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	{
 		FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(crashlyticsCollectionEnabled);
 	}
+
+	@Kroll.onAppCreate
+	public static void onAppCreate(TiApplication app) {
+		FirebaseCrashlytics.getInstance().recordException(new Exception());
+	}
+
+
+	// @Override
+	// protected void initActivity(Activity activity) {
+	// 	super.initActivity(activity);
+	// 	Log.i("-----", "App init activity");
+	// 	FirebaseCrashlytics.getInstance().recordException(new Exception());
+	// }
 }
