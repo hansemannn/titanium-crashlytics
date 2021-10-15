@@ -48,16 +48,14 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	}
 	
 	public static StackTraceElement[] generateStackTrace(String javaStack, String jsStack, String errorSourceName, String errorMessage, String errorLineSource, int errorLine) {
-		String javaHeader = "------------------------------JAVA STACK.TRACE------------------------------(JAVA STACK.TRACE:0)" + System.lineSeparator();
-		String jsHeader = "------------------------JAVASCRIPT STACK.TRACE------------------------(JAVASCRIPT STACK.TRACE:0)" + System.lineSeparator();
 		String bigStack;
 		
 		if (javaStack != null && jsStack != null) {
-			bigStack = javaHeader + javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1) + jsHeader + jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
+			bigStack = javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1) + jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
 		} else if (javaStack != null) {
-			bigStack = javaHeader + javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1);
+			bigStack = javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1);
 		} else if (jsStack != null) {
-			bigStack = jsHeader + jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
+			bigStack = jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
 		} else {
 			StackTraceElement[] trace = new StackTraceElement[] {
 				new StackTraceElement(errorSourceName, errorMessage, errorLineSource, errorLine)
