@@ -14,7 +14,9 @@ import android.util.Log;
 
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
+import org.appcelerator.kroll.KrollRuntime;
 import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.TiExceptionHandler;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
@@ -44,9 +46,79 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	{
 		FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(crashlyticsCollectionEnabled);
 	}
+	
+	public static StackTraceElement[] generateStackTrace(String javaStack, String jsStack, String errorSourceName, String errorMessage, String errorLineSource, int errorLine) {
+		String javaHeader = "------------------------------JAVA STACK.TRACE------------------------------(JAVA STACK.TRACE:0)" + System.lineSeparator();
+		String jsHeader = "------------------------JAVASCRIPT STACK.TRACE------------------------(JAVASCRIPT STACK.TRACE:0)" + System.lineSeparator();
+		String bigStack;
+		
+		if (javaStack != null && jsStack != null) {
+			bigStack = javaHeader + javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1) + jsHeader + jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
+		} else if (javaStack != null) {
+			bigStack = javaHeader + javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1);
+		} else if (jsStack != null) {
+			bigStack = jsHeader + jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
+		} else {
+			StackTraceElement[] trace = new StackTraceElement[] {
+				new StackTraceElement(errorSourceName, errorMessage, errorLineSource, errorLine)
+			};
+			return trace;
+		}
+		
+		String[] stackElements = bigStack.split(System.lineSeparator());
+		StackTraceElement[] trace = new StackTraceElement[stackElements.length + 1];
+		trace[0] = new StackTraceElement(errorSourceName, errorMessage, errorLineSource, errorLine);
+		for (int i = 0; i < stackElements.length; i++) {
+			String[] splitByParen = stackElements[i].substring(0, stackElements[i].length() - 1).split("\\(");
+				
+			String fileName = "";
+			int lineNumber = 0;
+			if (splitByParen[1].indexOf(":") > -1) {
+				String[] insideParen = splitByParen[1].split(":");
+				for (int j = 0; j < insideParen.length; j++) {
+					if ((insideParen[j].matches("[0-9]+"))) {
+				        // within the parenthesis, the first number is the line number, for both javaStack and jsStack
+				        lineNumber = Integer.parseInt(insideParen[j]);
+				        break;
+					} else {
+				        // within the parenthesis, everything before first number is the fileName
+				        fileName += insideParen[j] + ":";
+				    }
+				}
+				// remove extra ":"
+				fileName = fileName.substring(0, fileName.length() - 1);
+			} else {
+				fileName = splitByParen[1];
+				lineNumber = 0;
+			}
+						
+			String declaringClass;
+			String methodName;
+			if (splitByParen[0].indexOf(splitByParen[1].split("\\.")[0]) > -1) {
+				declaringClass = splitByParen[0].substring(0, splitByParen[0].indexOf(splitByParen[1].split("\\.")[0]) - 1).trim();
+				methodName = splitByParen[0].substring(splitByParen[0].indexOf(splitByParen[1].split("\\.")[0]));
+			} else {
+				declaringClass = splitByParen[0].substring(0, splitByParen[0].lastIndexOf('.')).trim();
+				methodName = splitByParen[0].substring(splitByParen[0].lastIndexOf('.') + 1);
+			}
+				
+			trace[i+1] = new StackTraceElement(declaringClass, methodName, fileName, lineNumber);
+	    }
+			
+		return trace;
+	}
 
 	@Kroll.onAppCreate
 	public static void onAppCreate(TiApplication app) {
-		FirebaseCrashlytics.getInstance().recordException(new Exception());
+		KrollRuntime.setPrimaryExceptionHandler(new TiExceptionHandler(){
+			@Override
+			public void handleException(ExceptionMessage error)
+			{
+				Throwable th = new Throwable();
+				th.setStackTrace(generateStackTrace(error.javaStack, error.jsStack, error.sourceName, error.message, error.lineSource, error.line));
+				FirebaseCrashlytics.getInstance().recordException(th);
+				super.handleException(error);
+			}
+		});
 	}
 }
