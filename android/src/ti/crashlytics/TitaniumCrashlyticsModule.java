@@ -8,10 +8,6 @@
  */
 package ti.crashlytics;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
-
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.KrollRuntime;
@@ -45,6 +41,11 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	public void setCrashlyticsCollectionEnabled(boolean crashlyticsCollectionEnabled)
 	{
 		FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(crashlyticsCollectionEnabled);
+	}
+
+	@Kroll.method
+	public void trackCustomValue(String key, String userProperty) {
+		FirebaseCrashlytics.getInstance().setCustomKey(key, userProperty);
 	}
 	
 	public static StackTraceElement[] generateStackTrace(String javaStack, String jsStack, String errorSourceName, String errorMessage, String errorLineSource, int errorLine) {
