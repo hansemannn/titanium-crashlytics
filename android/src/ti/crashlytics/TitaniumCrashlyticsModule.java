@@ -90,14 +90,14 @@ public class TitaniumCrashlyticsModule extends KrollModule
 				lineNumber = 0;
 			}
 						
-			String declaringClass;
-			String methodName;
-			if (splitByParen[0].indexOf(splitByParen[1].split("\\.")[0]) > -1) {
-				declaringClass = splitByParen[0].substring(0, splitByParen[0].indexOf(splitByParen[1].split("\\.")[0]) - 1).trim();
-				methodName = splitByParen[0].substring(splitByParen[0].indexOf(splitByParen[1].split("\\.")[0]));
-			} else {
-				declaringClass = splitByParen[0].substring(0, splitByParen[0].lastIndexOf('.')).trim();
-				methodName = splitByParen[0].substring(splitByParen[0].lastIndexOf('.') + 1);
+			String declaringClass = splitByParen[0].substring(0, splitByParen[0].lastIndexOf('.')).trim();
+			String methodName = splitByParen[0].substring(splitByParen[0].lastIndexOf('.') + 1);
+			
+			if (declaringClass == null) {
+				declaringClass = "unknown";
+			}
+			if (methodName == null) {
+				methodName = "unknown";
 			}
 				
 			trace[i+1] = new StackTraceElement(declaringClass, methodName, fileName, lineNumber);
