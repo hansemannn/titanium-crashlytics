@@ -90,17 +90,27 @@ public class TitaniumCrashlyticsModule extends KrollModule
 				fileName = splitByParen[1];
 				lineNumber = 0;
 			}
-						
-			String declaringClass = splitByParen[0].substring(0, splitByParen[0].lastIndexOf('.')).trim();
-			String methodName = splitByParen[0].substring(splitByParen[0].lastIndexOf('.') + 1);
-			
-			if (declaringClass == null) {
+
+			int lastIndex = splitByParen[0].lastIndexOf('.');
+
+			String declaringClass = "";
+			String methodName = "";
+
+			if (lastIndex == -1) {
 				declaringClass = "unknown";
-			}
-			if (methodName == null) {
 				methodName = "unknown";
-			}
+			} else {
+				declaringClass = splitByParen[0].substring(0, lastIndex).trim();
+				methodName = splitByParen[0].substring(lastIndex + 1);
 				
+				if (declaringClass == null) {
+					declaringClass = "unknown";
+				}
+				if (methodName == null) {
+					methodName = "unknown";
+				}
+			}
+
 			trace[i+1] = new StackTraceElement(declaringClass, methodName, fileName, lineNumber);
 	    }
 			
