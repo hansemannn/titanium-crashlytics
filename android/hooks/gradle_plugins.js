@@ -19,7 +19,7 @@ function init(logger, config, cli, appc) {
 	cli.on('build.pre.build', {
 		post: function () {
 			// 1. Extend project-wide build.gradle
-			const projectBuildGradle = path.resolve('./build/android/build.gradle');
+      const projectBuildGradle = path.join(cli.argv['project-dir'], 'build', 'android', 'build.gradle');
 			if (!fs.existsSync(projectBuildGradle)) { return; }
 
 			const projectBuildGradleContents = fs.readFileSync(projectBuildGradle, 'utf-8').toString();
@@ -29,7 +29,7 @@ function init(logger, config, cli, appc) {
 			fs.writeFileSync(projectBuildGradle, updatedProjectBuildGradleContents);
 
 			// 2. Extend app-wide build.gradle
-			const appBuildGradle = path.resolve('./build/android/app/build.gradle');
+      const appBuildGradle = path.join(cli.argv['project-dir'], 'build', 'android', 'app', 'build.gradle');
 			if (!fs.existsSync(appBuildGradle)) { return; }
 
 			const appBuildGradleContents = fs.readFileSync(appBuildGradle, 'utf-8').toString();
