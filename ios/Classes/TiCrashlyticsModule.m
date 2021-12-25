@@ -47,4 +47,34 @@
   assert(NO); // Forces a crash
 }
 
+- (void)setCustomKeyString:(id)args
+{
+  [self _setCustomKeyGeneric:args];
+}
+
+- (void)setCustomKeyInt:(id)args
+{
+  [self _setCustomKeyGeneric:args];
+}
+
+- (void)setCustomKeyDouble:(id)args
+{
+  [self _setCustomKeyGeneric:args];
+}
+
+- (void)setCustomKeyBoolean:(id)args
+{
+  [self _setCustomKeyGeneric:args];
+}
+
+- (void)_setCustomKeyGeneric:(id)args
+{
+  ENSURE_ARG_COUNT(args, 2);
+
+  NSString *key = args[0];
+  id value = args[1];
+
+  [[FIRCrashlytics crashlytics] setCustomValue:value forKey:key];
+}
+
 @end
