@@ -30,33 +30,35 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	public void crash() {
 		throw new RuntimeException("This is a crash");
 	}
-	
+
 	@Kroll.method
 	public void setCustomKeyString(String key, String value) {
 		FirebaseCrashlytics.getInstance().setCustomKey(key, value);
 	}
-	
+
 	@Kroll.method
 	public void setCustomKeyInt(String key, int value) {
 		FirebaseCrashlytics.getInstance().setCustomKey(key, value);
 	}
-	
+
 	@Kroll.method
 	public void setCustomKeyDouble(String key, double value) {
 		FirebaseCrashlytics.getInstance().setCustomKey(key, value);
 	}
-	
+
 	@Kroll.method
 	public void setCustomKeyBoolean(String key, boolean value) {
 		FirebaseCrashlytics.getInstance().setCustomKey(key, value);
 	}
 
+	@Kroll.method
 	@Kroll.setProperty
 	public void setUserId(String userId)
 	{
 		FirebaseCrashlytics.getInstance().setUserId(userId);
 	}
 
+	@Kroll.method
 	@Kroll.setProperty
 	public void setCrashlyticsCollectionEnabled(boolean crashlyticsCollectionEnabled)
 	{
@@ -67,10 +69,10 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	public void trackCustomValue(String key, String userProperty) {
 		FirebaseCrashlytics.getInstance().setCustomKey(key, userProperty);
 	}
-	
+
 	public static StackTraceElement[] generateStackTrace(String javaStack, String jsStack, String errorSourceName, String errorMessage, String errorLineSource, int errorLine) {
 		String bigStack;
-		
+
 		if (javaStack != null && jsStack != null) {
 			bigStack = javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1) + jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
 		} else if (javaStack != null) {
@@ -83,13 +85,13 @@ public class TitaniumCrashlyticsModule extends KrollModule
 			};
 			return trace;
 		}
-		
+
 		String[] stackElements = bigStack.split(System.lineSeparator());
 		StackTraceElement[] trace = new StackTraceElement[stackElements.length + 1];
 		trace[0] = new StackTraceElement(errorSourceName, errorMessage, errorLineSource, errorLine);
 		for (int i = 0; i < stackElements.length; i++) {
 			String[] splitByParen = stackElements[i].substring(0, stackElements[i].length() - 1).split("\\(");
-				
+
 			String fileName = "";
 			int lineNumber = 0;
 			if (splitByParen[1].indexOf(":") > -1) {
@@ -122,7 +124,7 @@ public class TitaniumCrashlyticsModule extends KrollModule
 			} else {
 				declaringClass = splitByParen[0].substring(0, lastIndex).trim();
 				methodName = splitByParen[0].substring(lastIndex + 1);
-				
+
 				if (declaringClass == null) {
 					declaringClass = "unknown";
 				}
@@ -133,7 +135,7 @@ public class TitaniumCrashlyticsModule extends KrollModule
 
 			trace[i+1] = new StackTraceElement(declaringClass, methodName, fileName, lineNumber);
 	    }
-			
+
 		return trace;
 	}
 
