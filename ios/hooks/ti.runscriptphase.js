@@ -9,6 +9,7 @@ exports.init = function (logger, _, cli, appc) {
 	cli.on('build.ios.xcodeproject', {
 		pre: function (data) {
 			const __ = appc.i18n(__dirname).__;
+			const appName = cli.tiapp.name;
 			const dsymPaths = path.join(cli.argv['project-dir'], 'build', 'iphone', 'build', 'Products', 'Release-iphoneos');
 			const googleServiceFile = path.join(cli.argv['project-dir'], 'Resources', 'iphone', 'GoogleService-Info.plist');
 			const scriptsFolder = path.join(cli.argv['project-dir'], 'scripts');
