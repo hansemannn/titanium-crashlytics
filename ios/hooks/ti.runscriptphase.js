@@ -13,7 +13,7 @@ exports.init = function (logger, _, cli, appc) {
 			const dsymPaths = path.join(cli.argv['project-dir'], 'build', 'iphone', 'build', 'Products', 'Release-iphoneos');
 			const googleServiceFile = path.join(cli.argv['project-dir'], 'Resources', 'iphone', 'GoogleService-Info.plist');
 			const scriptsFolder = path.join(cli.argv['project-dir'], 'scripts');
-			const scriptArgs = `${scriptsFolder}/run -gsp ${googleServiceFile} -p ios\n${scriptsFolder}/upload-symbols -gsp ${googleServiceFile} -p ios ${path.join(`${dsymPaths}/${appName}.app.dSYM`)}`;
+			const scriptArgs = `"${scriptsFolder}/run" -gsp "${googleServiceFile}" -p ios\n"${scriptsFolder}/upload-symbols" -gsp "${googleServiceFile}" -p ios "${path.join(`${dsymPaths}/${appName}.app.dSYM`)}"`;
 			const xcodeProject = data.args[0];
 
 			const builder = this;
