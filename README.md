@@ -28,10 +28,12 @@ removed and changed API's!
 
 1. Create a new folder `scripts/` in your project root
 2. Copy the `run` and `upload-symbols` shell files from this repo's `helper/` directory to `scripts/` in your project
-3. Make sure your Firebase project is configured properly and you have your `GoogleService-Info.plist` in place,
-as described [here](https://github.com/hansemannn/titanium-firebase).
+3. Make sure your Firebase project is configured properly and you have your `GoogleService-Info.plist` in place
+   as described [here](https://github.com/hansemannn/titanium-firebase).
+4. Make sure the upload-symbols file's permissions are correct, running `chmod +x PROJ_ROOT_PATH/scripts/upload-symbols`
+   (replace PROJ_ROOT_PATH with your real project root path)
 
-4. You are ready to go!
+5. You are ready to go!
 
 ### Android
 
@@ -42,7 +44,29 @@ crash.crash();  // test crash
 
 1. Add the following to the `<application>` tag inside the manifest configuration in your tiapp.xml:
 ```xml
-<meta-data android:name="io.fabric.ApiKey" android:value="YOUR_API_KEY" />
+<meta-data android:name="firebase_analytics_collection_enabled"
+  android:value="true"/>
+<meta-data android:name="google_analytics_adid_collection_enabled"
+  android:value="true"/>
+<service
+  android:name="com.google.android.gms.measurement.AppMeasurementService"
+  android:enabled="true"
+  android:exported="false"/>
+<service
+  android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+  android:permission="android.permission.BIND_JOB_SERVICE"
+  android:enabled="true"
+  android:exported="false"/>
+<service
+  android:name="INSERT_YOUR_APP_PACKAGE_NAME.gcm.RegistrationIntentService"
+  android:exported="false"/>
+<receiver
+  android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+  android:enabled="true">
+  <intent-filter>
+    <action android:name="com.google.android.gms.measurement.UPLOAD"/>
+  </intent-filter>
+</receiver>
 ```
 2. You are ready to go!
 
