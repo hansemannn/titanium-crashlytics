@@ -42,6 +42,16 @@
   [[FIRCrashlytics crashlytics] logWithFormat:@"%@", value];
 }
 
+- (void)recordError:(id)args
+{
+  ENSURE_SINGLE_ARG(args, NSDictionary)
+  NSString *errorDomain = [TiUtils stringValue:@"domain" properties:args];
+  NSInteger errorCode = [TiUtils intValue:@"code" properties:args def:0];
+  NSDictionary *userInfo = [args objectForKey:@"userInfo"];
+  NSError *error = [NSError errorWithDomain:errorDomain code:errorCode userInfo: userInfo];
+  [[FIRCrashlytics crashlytics] recordError:error];
+}
+
 - (void)crash:(id)unused
 {
   assert(NO); // Forces a crash
