@@ -8,6 +8,7 @@
  */
 package ti.crashlytics;
 
+import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.KrollRuntime;
@@ -68,6 +69,12 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	@Kroll.method
 	public void trackCustomValue(String key, String userProperty) {
 		FirebaseCrashlytics.getInstance().setCustomKey(key, userProperty);
+	}
+
+	@Kroll.method
+	public void recordError(KrollDict params) {
+		String domain = params.getString("domain");
+		FirebaseCrashlytics.getInstance().recordException(new Throwable(domain));
 	}
 
 	public static StackTraceElement[] generateStackTrace(String javaStack, String jsStack, String errorSourceName, String errorMessage, String errorLineSource, int errorLine) {

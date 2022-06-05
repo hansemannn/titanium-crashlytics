@@ -86,11 +86,10 @@ Log a Custom Event to see user actions that are uniquely important for your app 
 ### `setUserIdentifier(userIdentifier)`
 
 Specify a user identifier which will be visible in the Crashlytics UI.
-### iOS only API's
 
 ### `recordError({ domain, code, userInfo })`
 
-Records non-fatal errors.
+Records non-fatal errors. Note: The `code` and `userInfo` parameters are iOS-only.
 
 ### Android only API's
 
