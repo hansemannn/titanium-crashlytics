@@ -1,6 +1,6 @@
-# Crashlytics in Appcelerator Titanium
+# Crashlytics in Titanium
 
-Use the native Fabric Crashlytics iOS / Android SDK in Appcelerator Titanium.
+Use the native Crashlytics iOS / Android SDK in Titanium.
 
 ## Supporting this effort
 
@@ -10,19 +10,14 @@ thank you!
 
 ## Requirements
 
-- [x] iOS: Titanium SDK 8.0.0+
-- [x] Android: Titanium SDK 7.0.0+
+- [x] iOS: Titanium SDK 9.2.0+
+- [x] Android: Titanium SDK 9.0.0+
 
 ## Setup
 
 In general, remember to not use any Crashlytics API's before actually opening your first window. While this might not result
 in a crash on iOS, the native Android SDK will error if being used before your app finished launching due to requiring the
 native `Activity`.
-
-## Breaking changes!
-
-Module version 2.0.0 uses Firebase Crashlytics instead of the (deprecated) Fabric Crashlytics. Please make sure to check the
-removed and changed API's!
 
 ### iOS
 
@@ -79,36 +74,27 @@ the required API keys and project settings.
 
 ### Cross platform API's
 
-### `log(message)`
+### `Crashlytics.log(message)`
 
 Log a Custom Event to see user actions that are uniquely important for your app in real-time.
 
-### `setUserIdentifier(userIdentifier)`
+### `Crashlytics.userId = myUserId`
 
 Specify a user identifier which will be visible in the Crashlytics UI.
 
-### `recordError({ domain, code, userInfo })`
+### `Crashlytics.recordError({ domain, code, userInfo })`
 
 Records non-fatal errors. Note: The `code` and `userInfo` parameters are iOS-only.
 
 ### Android only API's
 
-### `crash()`
+### `Crashlytics.crash()`
 
 Simulate a crash (for testing purpose)
 
-### `throwException()`
+### `Crashlytics.throwException()`
 
 Simulate an exception (for testing purpose)
-
-### `setUserName(userName)`
-
-Specify a user name which will be visible in the Crashlytics UI.
-
-### `setUserEmail(userEmail)`
-
-Specify a user email which will be visible in the Crashlytics UI.
-
 
 ## Author
 
