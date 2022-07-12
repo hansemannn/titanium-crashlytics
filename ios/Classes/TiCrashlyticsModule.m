@@ -32,8 +32,14 @@
 
 - (void)setUserIdentifier:(id)userIdentifier
 {
-  ENSURE_SINGLE_ARG(userIdentifier, NSString);
-  [[FIRCrashlytics crashlytics] setUserID:userIdentifier];
+  DEPRECATED_REPLACED(@"Crashlytics.userIdentifier", @"", @"Crashlytics.userId");
+  [self setUserId:userIdentifier];
+}
+
+- (void)setUserId:(id)userId
+{
+  ENSURE_SINGLE_ARG(userId, NSString);
+  [[FIRCrashlytics crashlytics] setUserID:userId];
 }
 
 - (void)log:(id)value
