@@ -10,7 +10,7 @@ thank you!
 
 ## Requirements
 
-- [x] iOS: Titanium SDK 9.2.0+
+- [x] iOS: Titanium SDK 10.0.0+
 - [x] Android: Titanium SDK 9.0.0+
 
 ## Setup
