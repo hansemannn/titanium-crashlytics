@@ -101,23 +101,25 @@ public class TitaniumCrashlyticsModule extends KrollModule
 
 			String fileName = "";
 			int lineNumber = 0;
-			if (splitByParen[1].indexOf(":") > -1) {
-				String[] insideParen = splitByParen[1].split(":");
-				for (int j = 0; j < insideParen.length; j++) {
-					if ((insideParen[j].matches("[0-9]+"))) {
-				        // within the parenthesis, the first number is the line number, for both javaStack and jsStack
-				        lineNumber = Integer.parseInt(insideParen[j]);
-				        break;
-					} else {
-				        // within the parenthesis, everything before first number is the fileName
-				        fileName += insideParen[j] + ":";
-				    }
+			if (splitByParen.length > 1) {
+				if (splitByParen[1].indexOf(":") > -1) {
+					String[] insideParen = splitByParen[1].split(":");
+					for (int j = 0; j < insideParen.length; j++) {
+						if ((insideParen[j].matches("[0-9]+"))) {
+							// within the parenthesis, the first number is the line number, for both javaStack and jsStack
+							lineNumber = Integer.parseInt(insideParen[j]);
+							break;
+						} else {
+							// within the parenthesis, everything before first number is the fileName
+							fileName += insideParen[j] + ":";
+						}
+					}
+					// remove extra ":"
+					fileName = fileName.substring(0, fileName.length() - 1);
+				} else {
+					fileName = splitByParen[1];
+					lineNumber = 0;
 				}
-				// remove extra ":"
-				fileName = fileName.substring(0, fileName.length() - 1);
-			} else {
-				fileName = splitByParen[1];
-				lineNumber = 0;
 			}
 
 			int lastIndex = splitByParen[0].lastIndexOf('.');
