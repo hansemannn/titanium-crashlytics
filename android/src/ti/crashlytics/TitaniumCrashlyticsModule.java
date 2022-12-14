@@ -80,6 +80,10 @@ public class TitaniumCrashlyticsModule extends KrollModule
 	public static StackTraceElement[] generateStackTrace(String javaStack, String jsStack, String errorSourceName, String errorMessage, String errorLineSource, int errorLine) {
 		String bigStack;
 
+		if (errorSourceName == null) {
+			errorSourceName = "(not set)";
+		}
+
 		if (javaStack != null && jsStack != null) {
 			bigStack = javaStack.substring(javaStack.indexOf(System.lineSeparator()) + 1) + jsStack.substring(jsStack.indexOf(System.lineSeparator()) + 1);
 		} else if (javaStack != null) {
