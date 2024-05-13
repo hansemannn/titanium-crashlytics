@@ -9,3 +9,7 @@ module * { export * }
   link "c++"
   link "z"
 }
+module FirebaseCrashlytics.Swift {
+  header "FirebaseCrashlytics-Swift.h"
+  requires objc
+}
