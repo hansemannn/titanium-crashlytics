@@ -15,4 +15,4 @@ name: titanium-crashlytics
 moduleid: ti.crashlytics
 guid: 108ab55a-0cbb-4c63-ade2-536dabdfa250
 platform: android
-minsdk: 12.7.0
+minsdk: 9.0.0
