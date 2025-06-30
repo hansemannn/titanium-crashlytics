@@ -19,7 +19,7 @@ exports.init = function (logger, _, cli, appc) {
 			const builder = this;
 
 			if (data.ctx.deployType !== 'production') {
-				logger.debug(__('Skipping Crashlytics injection for non-production build …'));
+				logger.debug(__('Skipping Crashlytics injection for non-production build …'));
 				return;
 			}
 
@@ -47,7 +47,7 @@ exports.init = function (logger, _, cli, appc) {
 			}
 
 			if (builder.forceRebuild === false) {
-				logger.debug(__('Skipping Crashlytics injection for incremental build …'));
+				logger.debug(__('Skipping Crashlytics injection for incremental build …'));
 				return;
 			}
 
@@ -63,7 +63,14 @@ function addScriptBuildPhase(builder, xobjs, scriptArgs) {
 
 	const script_uuid = builder.generateXcodeUuid();
 	const shell_script = scriptArgs;
-	const input_paths = '(\n\t"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)"\n)';
+
+	const input_paths = `(
+		"$\{DWARF_DSYM_FOLDER_PATH}/$\{DWARF_DSYM_FILE_NAME}",
+		"$\{DWARF_DSYM_FOLDER_PATH}/$\{DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/$\{PRODUCT_NAME}",
+		"$\{DWARF_DSYM_FOLDER_PATH}/$\{DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+		"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+		"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)"
+	)`;
 
 	createPBXRunShellScriptBuildPhase(xobjs, script_uuid, shell_script, input_paths);
 	createPBXRunScriptNativeTarget(xobjs, script_uuid);
