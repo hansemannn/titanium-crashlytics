@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "FirebaseCrashlytics",
+    "printedName": "FirebaseCrashlytics",
     "children": [
       {
         "kind": "Import",
@@ -103,6 +103,22 @@
         "declAttributes": [
           "AccessControl",
           "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -286,13 +302,13 @@
               {
                 "kind": "TypeNominal",
                 "name": "RemoteConfigInterop",
-                "printedName": "FirebaseRemoteConfigInterop.RemoteConfigInterop",
+                "printedName": "any FirebaseRemoteConfigInterop.RemoteConfigInterop",
                 "usr": "c:@M@FirebaseRemoteConfigInterop@objc(pl)FIRRemoteConfigInterop"
               },
               {
                 "kind": "TypeNominal",
                 "name": "CrashlyticsPersistenceLog",
-                "printedName": "FirebaseCrashlytics.CrashlyticsPersistenceLog",
+                "printedName": "any FirebaseCrashlytics.CrashlyticsPersistenceLog",
                 "usr": "c:@M@FirebaseCrashlytics@objc(pl)FIRCLSPersistenceLog"
               }
             ],
@@ -413,6 +429,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -572,6 +602,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -626,102 +670,25 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
+      "filePath": "\/var\/folders\/y6\/nj790rtn62lfktb1sh__79hc0000gn\/T\/ZipRelease\/2025-06-18T04-06-35\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
       "kind": "IntegerLiteral",
       "offset": 958,
       "length": 3,
       "value": "128"
     },
     {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
+      "filePath": "\/var\/folders\/y6\/nj790rtn62lfktb1sh__79hc0000gn\/T\/ZipRelease\/2025-06-18T04-06-35\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
       "kind": "IntegerLiteral",
       "offset": 1008,
       "length": 3,
       "value": "256"
     },
     {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
+      "filePath": "\/var\/folders\/y6\/nj790rtn62lfktb1sh__79hc0000gn\/T\/ZipRelease\/2025-06-18T04-06-35\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
       "kind": "Array",
       "offset": 1099,
       "length": 2,
       "value": "[]"
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
-      "kind": "StringLiteral",
-      "offset": 2571,
-      "length": 5,
-      "value": "\"nil\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
-      "kind": "StringLiteral",
-      "offset": 2641,
-      "length": 34,
-      "value": "\"Failed to serialize rollouts: %@\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
-      "kind": "StringLiteral",
-      "offset": 871,
-      "length": 30,
-      "value": "\"FirebaseCrashlytics.CrashlyticsRemoteConfigManager\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
-      "kind": "StringLiteral",
-      "offset": 3069,
-      "length": 75,
-      "value": "\"Rollouts excess the maximum number of assignments can pass to Crashlytics\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/CrashlyticsRemoteConfigManager.swift",
-      "kind": "StringLiteral",
-      "offset": 3454,
-      "length": 79,
-      "value": "\"Rollouts excess the maximum length of parameter value can pass to Crashlytics\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/EncodedRolloutAssignment.swift",
-      "kind": "StringLiteral",
-      "offset": 683,
-      "length": 20,
-      "value": "\"FirebaseCrashlytics.EncodedRolloutsState\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/EncodedRolloutAssignment.swift",
-      "kind": "StringLiteral",
-      "offset": 953,
-      "length": 24,
-      "value": "\"FirebaseCrashlytics.EncodedRolloutAssignment\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/StringToHexConverter.swift",
-      "kind": "StringLiteral",
-      "offset": 871,
-      "length": 18,
-      "value": "\"0123456789abcdef\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/StringToHexConverter.swift",
-      "kind": "StringLiteral",
-      "offset": 917,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/StringToHexConverter.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1058,
-      "length": 1,
-      "value": "4"
-    },
-    {
-      "filePath": "\/var\/folders\/z4\/sx941vhj3jd2jb9_gwftzctc0000gn\/T\/ZipRelease\/2024-04-24T04-01-38\/project-ios\/Pods\/FirebaseCrashlytics\/Crashlytics\/Crashlytics\/Rollouts\/StringToHexConverter.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1151,
-      "length": 4,
-      "value": "0x0F"
     }
   ]
 }
