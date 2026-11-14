@@ -24,7 +24,7 @@ function init(logger, config, cli, appc) {
 
 			const projectBuildGradleContents = fs.readFileSync(projectBuildGradle, 'utf-8').toString();
 			const updatedProjectBuildGradleContents = projectBuildGradleContents
-				.split('dependencies {').join('dependencies {\n\t\tclasspath \'com.google.firebase:firebase-crashlytics-gradle:2.7.1\'');
+				.split('dependencies {').join('dependencies {\n\t\tclasspath \'com.google.firebase:firebase-crashlytics-gradle:3.0.8\'');
 
 			fs.writeFileSync(projectBuildGradle, updatedProjectBuildGradleContents);
 
